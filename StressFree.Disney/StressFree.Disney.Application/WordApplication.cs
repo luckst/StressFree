@@ -4,7 +4,6 @@ using StressFree.Disney.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace StressFree.Disney.Application
 {
@@ -20,6 +19,8 @@ namespace StressFree.Disney.Application
         public ResponseBoard GetInitialBoard()
         {
             ResponseBoard response = new ResponseBoard();
+            response.UsedWords = new List<UsedWord>();
+
             var words = wordData.GetWords();
 
             var maxSizeWord = words.Aggregate("", (max, w) => max.Length > w.Length ? max : w);
@@ -35,7 +36,7 @@ namespace StressFree.Disney.Application
                     int posX = rnd.Next(maxSizeWord.Length);
                     int posY = rnd.Next(maxSizeWord.Length);
 
-                    placed = PlaceWords(wordsLetters, direction, posX, posY, word.Trim().Replace(" ", ""), maxSizeWord.Length);
+                    placed = PlaceWords(wordsLetters, direction, posX, posY, word.Trim().Replace(" ", ""), maxSizeWord.Length, response);
                 }
             }
 
@@ -51,7 +52,8 @@ namespace StressFree.Disney.Application
         private Direction GetDirection()
         {
             Random rnd = new Random();
-            switch (rnd.Next(1, Enum.GetNames(typeof(Direction)).Length))
+            var countDirections = Enum.GetNames(typeof(Direction)).Length + 1;
+            switch (rnd.Next(1, countDirections))
             {
                 case 1: return Direction.Down;
                 case 2: return Direction.Right;
@@ -60,7 +62,7 @@ namespace StressFree.Disney.Application
             return Direction.Down;
         }
 
-        private bool PlaceWords(char[,] wordsLetters, Direction direction, int posX, int posY, string word, int maxSize)
+        private bool PlaceWords(char[,] wordsLetters, Direction direction, int posX, int posY, string word, int maxSize, ResponseBoard response)
         {
             try
             {
@@ -91,7 +93,7 @@ namespace StressFree.Disney.Application
                                 j++;
                             }
 
-                            //StoreWordPosition(Word, PlacementIndex_X, PlacementIndex_Y, OrientationDecision);
+                            response.UsedWords.Add(SaveUsedWord(word, posX, posY, direction));
                             return true;
                         }
                         break;
@@ -101,7 +103,7 @@ namespace StressFree.Disney.Application
                         {
                             if (j >= maxSize)
                                 return false;
-                            if (wordsLetters[j, posY] != '\0' && wordsLetters[posX, j] != word[i])
+                            if (wordsLetters[j, posY] != '\0' && wordsLetters[j, posY] != word[i])
                             {
                                 avalaible = false;
                                 break;
@@ -117,7 +119,7 @@ namespace StressFree.Disney.Application
                                 j++;
                             }
 
-                            //StoreWordPosition(Word, PlacementIndex_X, PlacementIndex_Y, OrientationDecision);
+                            response.UsedWords.Add(SaveUsedWord(word, posX, posY, direction));
                             return true;
                         }
                         break;
@@ -128,6 +130,18 @@ namespace StressFree.Disney.Application
             {
                 return false;
             }
+        }
+
+        private UsedWord SaveUsedWord(string word, int posX, int posY, Direction direction)
+        {
+            var usedWord = new UsedWord()
+            {
+                Direction = direction,
+                PosX = posX,
+                PosY = posY,
+                Word = word
+            };
+            return usedWord;
         }
 
         private void FillBlanks(char[,] wordsLetters, int maxSize)

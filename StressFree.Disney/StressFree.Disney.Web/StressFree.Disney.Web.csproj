@@ -26,8 +26,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\helper\timesPipe.ts" />
+    <None Remove="ClientApp\src\app\models\used-word.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\StressFree.Disney.Application\StressFree.Disney.Application.csproj" />
     <ProjectReference Include="..\StressFree.Disney.Data\StressFree.Disney.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\helper\timesPipe.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\used-word.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

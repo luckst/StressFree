@@ -1,0 +1,22 @@
+table {
+  margin: 0 auto;
+  width: 70%;
+  border-color: darkblue;
+}
+
+td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.highlight {
+  background-color: green
+}
+
+.founded {
+  background-color: lightgray
+}
+
+.hinted {
+  background-color: lightyellow
+}

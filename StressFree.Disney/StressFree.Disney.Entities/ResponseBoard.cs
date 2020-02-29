@@ -9,5 +9,6 @@ namespace StressFree.Disney.Entities
         public char[,] WordsLetters { get; set; }
         public List<string> Words { get; set; }
         public int MaxSize { get; set; }
+        public List<UsedWord> UsedWords { get; set; }
     }
 }

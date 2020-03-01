@@ -6,6 +6,7 @@ namespace StressFree.Disney.Data
 {
     public interface IWordData
     {
-        List<string> GetWords();
+        List<string> GetRandomWords();
+        bool ValidateWordInList(string word);
     }
 }

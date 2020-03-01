@@ -1,14 +1,39 @@
-<div style="text-align: center;width: 100%; height: 100%;">
-  <table *ngIf="responseBoard.maxSize > 0" class="table table-bordered" cellspacing="0" cellpadding="0">
+<div class="row" style="text-align: center;width: 100%; height: 100%;">
+  <table *ngIf="responseBoard.maxSize > 0 && !finish" class="table table-bordered" cellspacing="0" cellpadding="0">
     <tr *ngFor="let i of responseBoard.maxSize|times" style="padding: 0;">
       <td *ngFor="let j of responseBoard.maxSize|times; let idx = index;"
-          style="border:1px solid;padding: 1px;" [attr.position-cell]="[i,j]"
-          (click)="cellClicked(i,j,validateIndex(i,j),validateFounded(j,i))">
-        {{responseBoard.wordsLetters[i][j]}}
+          [attr.position-cell]="[j,i]"
+          [ngClass]="{'highlight': validateIndex(j,i),'founded': validateFounded(j,i),'hinted': validateHinted(j,i) && !validateFounded(j,i)}"
+          (click)="cellClicked(j,i,validateIndex(j,i),validateFounded(j,i))">
+        {{responseBoard.wordsLetters[j][i]}}
       </td>
     </tr>
   </table>
 </div>
-<!--<button type="button" (click)="getHint('AAAA')">Get Hint</button>-->
+<div *ngIf="responseBoard.maxSize > 0 && !finish" class="row">
+  <div class="col-md-12 text-center">
+    <h2>Word Search</h2>
+    <p>We've hidden {{responseBoard.words.length}} words, names or phrases in this puzzle. Can you find them all?</p>
+    <hr />
+    <ul>
+      <li *ngFor="let word of responseBoard.words" (click)="!validateFoundedSearchArea(word) && getHint(word)" [ngClass]="{'founded-search-area': validateFoundedSearchArea(word)}">{{word}}</li>
+    </ul>
+  </div>
+  
+</div>
+<div *ngIf="responseBoard.maxSize == 0">
+  <h2 class="text-danger">There aren't words in the list.</h2>
+  <button class="btn btn-primary" type="button" (click)="resetBoard()">Try Again</button>
+</div>
+<div *ngIf="finish" class="row">
+  <div class="col-md-12 text-center">
+    <h2>Word Search</h2>
+    <p>Number of words found without hint used: {{score}}</p>
+    <p>Number of words that required a hint: {{countHintedWords}}</p>
+
+    <h3>Total score: {{score}}</h3>
+    <button class="btn btn-primary" type="button" (click)="resetBoard()">Play Again</button>
+  </div>
+  
+</div>
 <router-outlet></router-outlet>
-<!--[ngClass]="{'highlight': validateIndex(i,j),'founded': validateFounded(j,i),'hinted': validateHinted(j,i)}"-->

@@ -1,22 +1,35 @@
+ul {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  list-style-type: none;
+}
+
 table {
   margin: 0 auto;
   width: 70%;
-  border-color: darkblue;
 }
 
 td {
   text-align: center;
   vertical-align: middle;
+  border: 2px solid darkblue;
+  padding: 1px;
+  font-weight: bold;
 }
 
 .highlight {
-  background-color: green
+  background-color: lightblue;
 }
 
 .founded {
-  background-color: lightgray
+  background-color: #F3DEDE;
 }
 
 .hinted {
-  background-color: lightyellow
+  background-color: #FFF700;
+}
+
+.founded-search-area {
+  color: #FF7878;
 }

@@ -8,5 +8,6 @@ namespace StressFree.Disney.Application
     public interface IWordApplication
     {
         ResponseBoard GetInitialBoard();
+        bool ValidateWordInList(string word);
     }
 }

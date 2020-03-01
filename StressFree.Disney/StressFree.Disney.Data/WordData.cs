@@ -16,7 +16,7 @@ namespace StressFree.Disney.Data
             this.appSettings = appSettings;
         }
 
-        public List<string> GetWords()
+        public List<string> GetRandomWords()
         {
             var wordsString = appSettings.Value.Words;
             var wordList = wordsString.Split(';').Where(w => w.Length > 2).ToList();
@@ -25,6 +25,14 @@ namespace StressFree.Disney.Data
             var wordsToTake = random.Next(3, wordList.Count);
 
             return wordList.Take(wordsToTake).ToList();
+        }
+
+        public bool ValidateWordInList(string word)
+        {
+            var wordsString = appSettings.Value.Words;
+            var wordList = wordsString.Split(';').Where(w => w.Length > 2).ToList();
+
+            return wordList.Any(w => w.Trim().Replace(" ", "") == word);
         }
     }
 }

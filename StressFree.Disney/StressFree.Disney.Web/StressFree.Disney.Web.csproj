@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\helper\timeoutInterceptor.ts" />
     <None Remove="ClientApp\src\app\helper\timesPipe.ts" />
     <None Remove="ClientApp\src\app\models\used-word.ts" />
   </ItemGroup>
@@ -36,6 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\helper\timeoutInterceptor.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\helper\timesPipe.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\used-word.ts" />
   </ItemGroup>

@@ -19,5 +19,12 @@ namespace StressFree.Disney.Web.Controllers
             var response = wordApplication.GetInitialBoard();
             return Json(response);
         }
+
+        [HttpGet("validateWord")]
+        public IActionResult ValidateWord(string word)
+        {
+            var response = wordApplication.ValidateWordInList(word);
+            return Json(new { exists = response });
+        }
     }
 }

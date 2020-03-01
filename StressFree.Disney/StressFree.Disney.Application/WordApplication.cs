@@ -20,35 +20,57 @@ namespace StressFree.Disney.Application
         {
             ResponseBoard response = new ResponseBoard();
             response.UsedWords = new List<UsedWord>();
+            response.IntersectionLetters = new List<string>();
 
-            var words = wordData.GetWords();
-
-            var maxSizeWord = words.Aggregate("", (max, w) => max.Length > w.Length ? max : w);
-            char[,] wordsLetters = new char[maxSizeWord.Length, maxSizeWord.Length];
-
-            foreach (var word in words)
+            try
             {
-                var placed = false;
-                while (!placed)
+                var words = wordData.GetRandomWords();
+
+                var maxSizeWord = words.Aggregate("", (max, w) => max.Length > w.Length ? max : w);
+                var maxSize = maxSizeWord.Length;
+                char[,] wordsLetters = new char[maxSize, maxSize];
+
+                foreach (var word in words)
                 {
-                    Direction direction = GetDirection();
-                    Random rnd = new Random();
-                    int posX = rnd.Next(maxSizeWord.Length);
-                    int posY = rnd.Next(maxSizeWord.Length);
+                    var placed = false;
+                    var countPlacingAttempts = 0;
 
-                    placed = PlaceWords(wordsLetters, direction, posX, posY, word.Trim().Replace(" ", ""), maxSizeWord.Length, response);
+                    while (!placed)
+                    {
+                        Direction direction = GetDirection();
+                        Random rnd = new Random();
+                        int posX = rnd.Next(maxSize);
+                        int posY = rnd.Next(maxSize);
+
+                        placed = PlaceWords(wordsLetters, direction, posX, posY, word.Trim().Replace(" ", ""), maxSize, response);
+                        if (!placed)
+                            countPlacingAttempts++;
+
+                        //if (countPlacingAttempts > 100)
+                        //    throw new Exception();
+                    }
                 }
+
+                FillBlanks(wordsLetters, maxSize);
+
+                response.WordsLetters = wordsLetters;
+                response.Words = words;
+                response.MaxSize = maxSize;
             }
-
-            FillBlanks(wordsLetters, maxSizeWord.Length);
-
-            response.WordsLetters = wordsLetters;
-            response.Words = words;
-            response.MaxSize = maxSizeWord.Length;
+            catch (Exception)
+            {
+                response.MaxSize = 0;
+            }
 
             return response;
         }
 
+        public bool ValidateWordInList(string word)
+        {
+            return wordData.ValidateWordInList(word);
+        }
+
+        #region Private methods
         private Direction GetDirection()
         {
             Random rnd = new Random();
@@ -89,6 +111,10 @@ namespace StressFree.Disney.Application
                             j = posY;
                             for (int i = 0; i < word.Length; i++)
                             {
+                                if (wordsLetters[posX, j] == word[i])
+                                {
+                                    response.IntersectionLetters.Add($"{posX},{j}");
+                                }
                                 wordsLetters[posX, j] = word[i];
                                 j++;
                             }
@@ -108,6 +134,7 @@ namespace StressFree.Disney.Application
                                 avalaible = false;
                                 break;
                             }
+                         
                             j++;
                         }
                         if (avalaible)
@@ -115,6 +142,10 @@ namespace StressFree.Disney.Application
                             j = posX;
                             for (int i = 0; i < word.Length; i++)
                             {
+                                if (wordsLetters[j, posY] == word[i])
+                                {
+                                    response.IntersectionLetters.Add($"{j},{posY}");
+                                }
                                 wordsLetters[j, posY] = word[i];
                                 j++;
                             }
@@ -152,5 +183,6 @@ namespace StressFree.Disney.Application
                     if (wordsLetters[i, j] == '\0')
                         wordsLetters[i, j] = (char)(65 + rnd.Next(26));
         }
+        #endregion
     }
 }

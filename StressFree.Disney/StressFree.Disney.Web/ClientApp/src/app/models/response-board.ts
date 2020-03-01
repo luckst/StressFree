@@ -5,4 +5,5 @@ export class ResponseBoard {
   words: string[];
   maxSize: number;
   usedWords: UsedWord[];
+  intersectionLetters: string[];
 }

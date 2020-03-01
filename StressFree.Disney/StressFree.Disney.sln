@@ -17,7 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Common", "4.Common", "{BC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StressFree.Disney.Entities", "StressFree.Disney.Entities\StressFree.Disney.Entities.csproj", "{0C0BA50D-181C-4FE1-AC0C-D838FF23565D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StressFree.Disney.Web", "StressFree.Disney.Web\StressFree.Disney.Web.csproj", "{6DBBE5F6-E5D2-4131-846F-63EE45B145A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StressFree.Disney.Web", "StressFree.Disney.Web\StressFree.Disney.Web.csproj", "{6DBBE5F6-E5D2-4131-846F-63EE45B145A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Tests", "5.Tests", "{2942537A-EC40-4CC1-8F02-2BA8EE807403}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StressFree.Disney.Data.Tests", "StressFree.Disney.Data.Tests\StressFree.Disney.Data.Tests.csproj", "{715095F2-281C-425F-BA3B-A4E5F423EEEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,10 @@ Global
 		{6DBBE5F6-E5D2-4131-846F-63EE45B145A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DBBE5F6-E5D2-4131-846F-63EE45B145A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DBBE5F6-E5D2-4131-846F-63EE45B145A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{715095F2-281C-425F-BA3B-A4E5F423EEEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{715095F2-281C-425F-BA3B-A4E5F423EEEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{715095F2-281C-425F-BA3B-A4E5F423EEEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{715095F2-281C-425F-BA3B-A4E5F423EEEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +58,7 @@ Global
 		{9BC878D4-089C-4D7E-8982-F066E09AE6BB} = {840A2FA1-08F6-4C58-98C1-AFB9E434987B}
 		{0C0BA50D-181C-4FE1-AC0C-D838FF23565D} = {BC11EE7F-210B-48F3-B26F-63AAE3C817E9}
 		{6DBBE5F6-E5D2-4131-846F-63EE45B145A2} = {2D499041-551B-4093-8AD7-64E7E250AEE6}
+		{715095F2-281C-425F-BA3B-A4E5F423EEEC} = {2942537A-EC40-4CC1-8F02-2BA8EE807403}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E205654C-3F14-4A82-B8D6-1CF586FF4DCD}

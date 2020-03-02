@@ -33,7 +33,6 @@ namespace StressFree.Disney.Application
                 foreach (var word in words)
                 {
                     var placed = false;
-                    var countPlacingAttempts = 0;
 
                     while (!placed)
                     {
@@ -43,11 +42,6 @@ namespace StressFree.Disney.Application
                         int posY = rnd.Next(maxSize);
 
                         placed = PlaceWords(wordsLetters, direction, posX, posY, word.Trim().Replace(" ", ""), maxSize, response);
-                        if (!placed)
-                            countPlacingAttempts++;
-
-                        //if (countPlacingAttempts > 100)
-                        //    throw new Exception();
                     }
                 }
 
